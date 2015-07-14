@@ -1,4 +1,3 @@
----
 # はじめに
 
 ## 参考資料
@@ -19,7 +18,7 @@ https://access.redhat.com/documentation/ja-JP/OpenShift_Enterprise/
 * ose3-node1.example.com
 * ose3-node2.example.com
 
-![サーバ構成](./images/v3.0ServerStructure.png)
+![サーバ構成](images/v3.0ServerStructure.png)
 
 ※インストールガイドでは、Master サーバをインフラ用 Node としても利用しています。
 
