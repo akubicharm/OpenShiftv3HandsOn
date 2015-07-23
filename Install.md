@@ -56,7 +56,7 @@ https://access.redhat.com/documentation/ja-JP/OpenShift_Enterprise/
 * 実行サーバ：Master
 
 ## ネットワーク設定が自動的に変更されないように、Network Manager を停止
-    [root@ose3-master ~]# yum remove NetworkManager *
+    [root@ose3-master ~]# yum remove NetworkManager
 
 ## 必要なパッケージをインストール
     [root@ose3-master ~]# yum install wget git net-tools bind-utils iptables-services bridge-utils
@@ -133,6 +133,7 @@ File = /etc/sysconfig/docker
 
 ## 公開鍵の配布
     [root@ose3-master ~]# for host in ose3-master.example.com \
+     ose3-node0.example.com \
      ose3-node1.example.com \
      ose3-node2.example.com; \
     do ssh-copy-id -i ~/.ssh/id_rsa.pub $host; \
@@ -147,7 +148,7 @@ File = /etc/sysconfig/docker
     [root@ose3-master ~]# yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 
 ## yum リポジトリの設定変更
-ansible をインストールするため、epel のYUMレジストリを有効にします
+ansible をインストールするため、epel のYUMレジストリを無効にします
 
     [root@ose3-master ~]# sed -i -e "s/^enabled=1/enabled=0/" /etc/yum.repos.d/epel.repo
 
