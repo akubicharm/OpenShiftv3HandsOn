@@ -33,6 +33,16 @@ https://access.redhat.com/documentation/ja-JP/OpenShift_Enterprise/
 
 インストール対象の全てのサーバで実施します。
 
+
+## 環境確認
+* github との接続
+
+ インストール中に、ImageStream（OpenShiftで利用できるアプリケーションテンプレート）の取得の過程で github.com に接続しますので、マスタサーバから github.com へ接続可能であることを確認してください。
+
+* hosts ファイル
+
+ 名前解決するため、マスタサーバ、ノードサーバの /etc/hosts の設定を確認してください
+
 ## Subscriptionの有効化
 
 * 実行ユーザ: root
