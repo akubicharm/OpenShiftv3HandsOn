@@ -18,7 +18,8 @@ Refer Administration Guide to understand install steps in detail.
 * ose3-node1.example.com
 * ose3-node2.example.com
 
-![Server Topology](images/v3.0ServerStructure.png)
+![Server Topology](images/v3.0ServerStructure_en.png)
+
 CAUTION: ose3-master.example.com and ose3-node0.example.com(Infrastructure Node) appeared as one server in the Administration Guide.
 
 This install guide figure out installation steps using https://github.com/openshift/openshift-ansible.
