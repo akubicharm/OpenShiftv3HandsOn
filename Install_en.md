@@ -19,17 +19,17 @@ Refer Administration Guide to understand install steps in detail.
 * ose3-node2.example.com
 
 ![Server Topology](images/v3.0ServerStructure.png)
-CAUTION: ose3-master.example.com and ose3-node0.example.com(Infrastructure Node) is one server in the Administration Guide.
+CAUTION: ose3-master.example.com and ose3-node0.example.com(Infrastructure Node) appeared as one server in the Administration Guide.
 
-This install guide shows install steps using https://github.com/openshift/openshift-ansible.
-By the default of thisn configuration, authentication methodology is htpasswd.By the default, authentication methodology is htpasswd.
-When you want to change authentication methodology, please refer https://access.redhat.com/beta/documentation/en/openshift-enterprise-30-administrator-guide#configuring-authentication.
+This install guide figure out installation steps using https://github.com/openshift/openshift-ansible.
+By the default, htpasswd is used as a authentication methodology.
+If you want to change authentication methodology, please refer https://access.redhat.com/beta/documentation/en/openshift-enterprise-30-administrator-guide#configuring-authentication.
 
 
 ---
 # Install
 
-Following steps are executed all servers.
+Following steps are executed on all servers.
 
 
 ## Confirm environment
@@ -74,7 +74,7 @@ To resolve the server IP address, please confirm /etc/host file on both Master a
     [root@ose3-master ~]# yum update
 
 
-# Instal Docker
+# Install Docker
 * User: root
 * Server: Master
 
@@ -83,7 +83,7 @@ To resolve the server IP address, please confirm /etc/host file on both Master a
 
 ## Edit /etc/sysconfig/docker
 Set "OPTIONS" properties 
-The --insecur-registry option instructs the Docker daemon to trust any Docker registry on the 172.30.0.0/16 subnet, rather than requiring a certificate.
+The --insecur-registry option instructs the docker daemon to trust any Docker registry on the 172.30.0.0/16 subnet, rather than requiring a certificate.
 
 File = /etc/sysconfig/docker
 
@@ -197,7 +197,7 @@ Get ansible installer from Github.
 
 
 ## Configure /etc/ansible/hosts
-CAUTION: "deployment_type" is necessary
+CAUTION: "deployment_type" is necessary.
 Please overwrite the following both Master and Node host name with actual FQDN.
 
 File = /etc/ansible/hosts
@@ -230,8 +230,9 @@ File = /etc/ansible/hosts
 
 
 ### Get node properties as YAML
-`oc get nodes` で Node サーバに `regizon` と `zone` が設定されていない場合、`oc edit` コマンドで追加してください。
-追加内容は以下の通りです。
+Confirm node labels with `oc get nodes` command.
+If `region` and `zone` are not set as a label, please configure the label with `oc edit`.
+`oc get nodes` で Node サーバに `region` と `zone` が設定されていない場合、`oc edit` コマンドで追加してください。
 
 ### Node for infrastructure : Node0
 
@@ -240,8 +241,7 @@ Add following 2 lines.
     region: infra
     zone: default
 
-CAUTION: Indent has important meaning, please edit carefully.
-※インデントに意味があるので、インデントは間違えないように注意してください。
+CAUTION: Indent has important meanings, please edit carefully.
 
     [root@ose3-master ~]# oc edit node <node_name> --output='yaml'
 
@@ -328,15 +328,12 @@ Add following 2 lines.
 
 ---
 # Configure DNS
-In this section, figure out how to configure DNSMasq on "ose3-node0".
+This section shows how to configure DNSMasq on "ose3-node0".
 
+Configure DNSMasq on the ose3-node0 (Infrastructure node)
+Do NOT install DNSMasq on your master. OpenShift Now has an internal DNS service provided by Go's SkyDNS that is used for internal service communication.
 
-ここではDNSMasqでのDNS設定方法を示します。
-ose3-node0 に DNSMasq を設定します。
-Master サーバでは、内部的に利用するべつのDNSサーバが稼働しているので、Master サーバ以外で
-DNSMasq または DNSサーバを動かしてください。
-
-ネーミングサービスを提供するサーバは53ポートが利用できる必要がありますので、`iptables`コマンドで53番ポートを解放します。
+Naming service use both 53/tcp and 53/udp
 
     [root@ose3-node0 ~]# iptables -I INPUT -p tcp --dport 53 -j ACCEPT
     [root@ose3-node0 ~]# iptables -I INPUT -p udp --dport 53 -j ACCEPT
@@ -386,8 +383,6 @@ You can find the following 2 lines.
 ### Trouble shooting
 When the following error occured, please confirm `/etc/syscnfig/docker` on Node server.
 `OPTIONS=--selinux-enabled --insecure-registry 172.30.0.0/16`
-
-Docker Registry 作成時に以下のようなエラーが発生した場合は、Docker Registry を作成するNodeサーバの `/etc/sysconfig/docker`  を確認し `OPTIONS=--selinux-enabled --insecure-registry 172.30.0.0/16` となっていることを確認してください。
 
     # oc get pods
     NAME                      READY     REASON    RESTARTS   AGE
