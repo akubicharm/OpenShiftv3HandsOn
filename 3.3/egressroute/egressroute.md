@@ -90,11 +90,37 @@ spec:
 ```
 
 ### Podとサービスのデプロイ
+egress route のPodは特権コンテナとして実行するので、クラスタ管理者でデプロイする必要がある。
 ユーザ `system:admin`
 ```
 oc new-project egress
 oc create -f egressroute.yaml
 oc create -f egresssservice.yaml
+```
+
+
+egress route の確認
+```
+# oc get pods
+NAME                           READY     STATUS      RESTARTS   AGE
+egress-1                       1/1       Running     0          25m
+o
+# oc logs egress-1
++ '[' -z 192.168.0.99 ']'
++ '[' -z 104.199.239.163 ']'
++ '[' -z 192.168.0.2 ']'
++ ip route get 104.199.239.163
++ grep -q macvlan0
++ ip addr add 192.168.0.99/32 dev macvlan0
++ ip link set up dev macvlan0
++ ip route add 192.168.0.2/32 dev macvlan0
++ ip route add 104.199.239.163/32 via 192.168.0.2 dev macvlan0
++ iptables -t nat -A PREROUTING -i eth0 -j DNAT --to-destination 104.199.239.163
++ iptables -t nat -A POSTROUTING -j SNAT --to-source 192.168.0.99
++ arping -q -A -c 1 -I macvlan0 192.168.0.99
++ trap exit TERM
++ wait
++ tail -f /dev/null
 ```
 ### 動作確認
 ちゃんと外部接続する用のアプリケーションをデプロイすれば良いのですが、ここでは簡易的にpythonのコンテナをデプロイして、curl でアクセスを確認する。
