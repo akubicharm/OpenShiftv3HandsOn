@@ -6,9 +6,9 @@ A. イントロダクション
 
 B. アプリケーションのデプロイ
  1. [シンプルなアプリケーションのデプロイ](deployInstantApp/DeployInstantApp.md)
- 2. [複雑なアプリケーションのデプロイ](deployComplexApp/DeloyComplexApp.md)
+ 2. [複雑なアプリケーションのデプロイ](deployComplexApp/DeployComplexApp.md)
  3. [Docker Imageを使ったデプロイ](deployDockerImage/DeployDockerImage.md)
- 4. [WARファイルを使ったデプロイ](deployWarfile/DeployWarfile.md)
+ 4. [WARファイルを使ったデプロイ](deployWarfile/deployWarfile.md)
 
 C. 継続的インテグレーション/継続的デリバリー
 
