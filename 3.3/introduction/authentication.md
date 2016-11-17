@@ -1,6 +1,32 @@
-# 重要な要素
+# 権限管理
+![Role Bindings](./RoleBindings.png)
 
-## Policy
+* Rule
+  + 何ができるかの定義
+* Role
+  + ルールの集合
+* Bindings
+  + Roleの紐付け
+* Policy  
+  ユーザがProject内で何ができるかを許可する仕組み。
+    + Cluster policy  
+    全プロジェクトを対象としたポリシーで、Cluster rolesを割り当てる
+    + Local policy  
+    特定のプロジェクトを対象としたポリシーで、Local rolesを割り当てる
+
+**デフォルトロール一覧**
+
+|デフォルトのRole|詳細|
+|---|---|
+|admin|プロジェクトの管理権限。プロジェクトないのすべてのリソースにアクセス可能|
+|basic-user|プロジェクトやユーザの情報を参照可能|
+|edit|project内のリソース編集の権限。ただし、role や bindingsの参照と編集は不可|
+|self-provisioner|プロジェクトの作成権限。ユーザにプロジェクト作成をさせたくない場合は、一般ユーザからこの権限を剥奪する|
+|view|参照権限。プロジェクト内のオブジェクトを参照可能。ただし、role やbindingsの参照は不可|
+|cluster-admin|OpenShiftそのもののスーパーユーザ|
+|cluster-status|OpenShiftのクラスタステータスの参照権限|
+
+
 
 ## Service Account
 OpenShiftのAPIへのアクセスをコントロールするためのオブジェクト。各プロジェクトにはデフォルトで以下のサービスアカウントが作成される。
@@ -34,14 +60,13 @@ cluster administrator, nodes, build controller は、priviledged SCC にアク�
  + 決められたUIDの範囲内でPodは実行される
 
 
+## SCCの確認と適用
 ### 登録済み SCC の確認方法
 ```
 oc get scc
 ```
 
-### SCC の適用方法
-
-#### ユーザーやグループへのSCCの適用
+### ユーザーやグループへのSCCの適用
 特定のユーザーやグループに、特権Podを作成する権限を与える場合は、次のように設定する。
 ```
 oadm policy add-scc-to-user <scc-name> <user-name>
@@ -53,7 +78,7 @@ oadm policy add-scc-to-group <scc-name> <group-name>
 oadm policy add-scc-to-user priviledged special-user
 ```
 
-#### サービスアカウントへのSCCの適用
+### サービスアカウントへのSCCの適用
 ```
 oadm policy add-scc-to-user priviledged system:serviceaccount:<プロジェクト名>:<サービスアカウント名>
 ```
@@ -63,7 +88,9 @@ oadm policy add-scc-to-user priviledged system:serviceaccount:<プロジェク�
 oadm policy add-scc-to-user priviledged system:serviceaccount:myproject:mysvc
 ```
 
-#### 外部のリポジトリからダウンロードしたDocker　Image を実行可能にする
+### 外部のリポジトリからダウンロードしたDocker　Image を実行可能にする
+
+OpenShiftでは、コンテナ内のプロセスは一般ユーザ(UID=1001)で実行される。
 
 認証済み（OpenShiftにログインしている）ユーザ全員に許可する場合
 
@@ -75,16 +102,3 @@ oadm policy add-scc-to-group anyuid:authenticated
 ```
 oadm policy add-scc-to-user anyuid system:serviceaccont:myproject
 ```
-
-
-
-
-
-
-
-
-
-
-
-# セキュリティ関連
-OpenShiftでは、コンテナ内のプロセスは一般ユーザ(UID=1001)で実行される。

@@ -45,4 +45,5 @@ app       app-wardeploy.cloudapps-e49d.oslab.opentlc.com             app        
 ```
 
 ## アプリケーションの確認
-`http://app-wardeploy.cloudapps-e49d.oslab.opentlc.com/jboss-kitchensink`にアクセス
+1. ブラウザでアクセス
+`http://app-wardeploy.cloudapps-e49d.oslab.opentlc.com/jboss-kitchensink`

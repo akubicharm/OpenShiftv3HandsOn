@@ -76,3 +76,7 @@ for thread in threads:
 
 print('Complete')
 ```
+
+
+## LimitRange
+LimitRangeは、クラスタ管理者が各プロジェクトで利用可能なリソースの制限を与えることができる
