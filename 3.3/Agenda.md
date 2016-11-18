@@ -12,8 +12,8 @@ B. アプリケーションのデプロイ
  4. [WARファイルを使ったデプロイ](deployWarfile/deployWarfile.md)
 
 C. 継続的インテグレーション/継続的デリバリー
-1. [継続的インテグレーション](continuousIntegration/continuousIntegration.md)
-2. [継続的デリバリー](continuousDelivery/continuousDelivery.md)
+ 1. [継続的インテグレーション](continuousIntegration/continuousIntegration.md)
+ 2. [継続的デリバリー](continuousDelivery/continuousDelivery.md)
 
 D. コンテナ管理
  1. [オートスケール](autoscale/autoscale.md)
