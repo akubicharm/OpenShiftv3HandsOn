@@ -1,5 +1,35 @@
 # 継続的デリバリー
 
+![CD](cd.jpg)
+
+## Container Image
+コンテナイメージが作成されリポジトリに登録されるときは、
+* namespace
+* name
+* tag
+* imageのメタデータ
+が付与される。
+
+![tagschema](./tagschema.jpg)
+
+## Image Stream
+Image Streamは、コンテナイメージへの参照。
+
+![imagestream](./imagestream.jpg)
+
+![tag_step1](./tag_step1.jpg)
+
+![tag_step2](./tag_step2.jpg)
+
+### 参照可能なオブジェクト
+* OpenShiftのビルダーでビルドした同一プロジェクト内のコンテナイメージ
+* 他の Image Stream
+* 外部のDocker Registry で配布されている Docker Image
+
+### タグ
+コンテナイメージに付与するラベル。
+
+
 ## Image Stremの管理
 1. CLI で OpenShift にログイン
 ```
@@ -80,3 +110,6 @@ helloci プロジェクトの Image Stream に、プロダクション用のタ�
 oc get is
 oc tag helloci/world:latest helloci/world:prod
 ```
+
+
+http://developerblog.redhat.com/2016/01/13/a-practical-introduction-to-docker-container-terminology/

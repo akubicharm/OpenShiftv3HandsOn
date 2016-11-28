@@ -13,7 +13,10 @@ B. アプリケーションのデプロイ
 
 C. 継続的インテグレーション/継続的デリバリー
  1. [継続的インテグレーション](continuousIntegration/continuousIntegration.md)
+
  2. [継続的デリバリー](continuousDelivery/continuousDelivery.md)
+
+ 3. [アプリケーションのロールバック](rollback/rollback.md)
 
 D. コンテナ管理
  1. [オートスケール](autoscale/autoscale.md)
