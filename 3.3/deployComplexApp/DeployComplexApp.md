@@ -32,7 +32,7 @@
 テンプレート一覧から「php:5.x - Latest」を選択。
 
 5. Pod作成  
-Nameフィールドに「world」、Git Repository URLに「https://github.com/akubicharm/hello-php」と入力し、「Create」ボタンをクリック
+Nameフィールドに「world」、Git Repository URLに`https://github.com/akubicharm/hello-php`と入力し、「Create」ボタンをクリック
 
 6. ビルドとデプロイの確認  
 「Next Steps」画面で`Continue to overview`のリンクをクリック。
