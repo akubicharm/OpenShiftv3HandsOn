@@ -3,7 +3,7 @@
 ## Agenda
 A. Introduction
  1. [TERMINOLOGY](introduction/terminology.md)
- 2. [AUTHENTICATION](introduction/authentication.md)
+ 2. [AUTHENTICATION](introduction/authorization.md)
 
 B. Deploy Application
  1. [Deploy Instant App](deployInstantApp/DeployInstantApp.md)
