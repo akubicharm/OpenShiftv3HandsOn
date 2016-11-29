@@ -104,7 +104,7 @@ oc describe is world
 Display the overview of the hellocd project so that reflection of changes can be seen.
 
 5. Make a tag for Production  
-Give a tag for production to Image Stream of helloci project
+Give a tag for production to Image Stream of helloci project.
 ```
 oc get is
 oc tag helloci/world:latest helloci/world:prod
