@@ -18,29 +18,29 @@
 
 | Default Role | Details |
 |---|---|
-| Admin | Project administration authority. Access to all resources without project |
-| Basic - user | Project and user information can be referenced |
-| Edit | Authority to edit resources in project. However, reference and editing of role and bindings are not allowed |
-| Self - provisioner | Create project authority. If you do not want the user to create a project, remove this privilege from the general user |
-| View | Reference authority. Objects in the project can be referenced. However, role and bindings can not be referenced |
-| Cluster-admin | superuser of OpenShift itself |
-| Cluster-status | OpenShift's cluster status reference authority |
+| admin | Project administration authority. Access to all resources without project |
+| basic-user | Project and user information can be referenced |
+| edit | Authority to edit resources in project. However, reference and editing of role and bindings are not allowed |
+| self-provisioner | Create project authority. If you do not want the user to create a project, remove this privilege from the general user |
+| view | Reference authority. Objects in the project can be referenced. However, role and bindings can not be referenced |
+| cluster-admin | superuser of OpenShift itself |
+| cluster-status | OpenShift's cluster status reference authority |
 
 
 
 ## Service Account
-Object to control access to OpenShift API. The following service accounts are created by default in each project.
+Service account is Object to control access to OpenShift API. The following service accounts are created by default in each project.
 It is possible to grant authority by policy as usual user.
 Service Account consists of project name and user name.
 
-`System:serviceaccount:<project name>:<name>`
+`system:serviceaccount:<project name>:<name>`
 
 
 | Service Account | Details |
 |---|---|
-| Builder | A service account for building Pod. Systme: push the generated Docker Image to the Docker registry with the authority of image-builder and inside OpenShift |
-| Deployer | Service account for deploying Pod. With the authority of system: deployer, it is possible to reference and edit Replication Controller and Pod. |
-| Default | All serviceable accounts other than builder and deployer service account |
+| builder | A service account for building Pod. Systme: push the generated Docker Image to the Docker registry with the authority of image-builder and inside OpenShift |
+| deployer | Service account for deploying Pod. With the authority of system: deployer, it is possible to reference and edit Replication Controller and Pod. |
+| default | All serviceable accounts other than builder and deployer service account |
 
 ## Security Context Constraints (SCCs)
 A mechanism for managing the authority of Pod.
@@ -73,7 +73,7 @@ oadm policy add-scc-to-user <scc-name> <user-name>
 oadm policy add-scc-to-group <scc-name> <group-name>
 ```
 
-** Example) When giving special-user authority to create privileged Pod **
+**Example) When giving special-user authority to create privileged Pod**
 ```
 oadm policy add-scc-to-user priviledged special-user
 ```
@@ -83,7 +83,7 @@ oadm policy add-scc-to-user priviledged special-user
 oadm policy add-scc-to-user priviledged system:serviceaccount:<project name>:<service account name>
 ```
 
-** Example) When applying scc to mysvc of myproject project **
+**Example) When applying scc to mysvc of myproject project**
 ```
 oadm policy add-scc-to-user priviledged system:serviceaccount:myproject:mysvc
 ```
