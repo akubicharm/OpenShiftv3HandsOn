@@ -64,11 +64,10 @@ Nameフィールドに「world」、Git Repository URLに`https://github.com/aku
 |MySQL Databaes Name|mydb|
 
 ### PHP Podの環境変数の設定
-1. デプロイメントコンフィグの選択
-
+1. デプロイメントコンフィグの選択  
 管理webの左側のペインで「Applications->Deployments」を選択し、右側のペインのDeployments一覧から「world」を選択。
 
-2. 環境変数の設定
+2. 環境変数の設定  
 管理Webの右側のペインで「Environment」タブを選択。Environment画面で環境変数を設定し、「Save」ボタンをクリック。
 
 |Name|Value|
