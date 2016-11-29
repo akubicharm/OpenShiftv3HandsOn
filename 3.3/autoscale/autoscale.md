@@ -1,9 +1,18 @@
 # オートスケール
 オートスケールを有効にするための設定を行います。
 
-## Limit, Quota
+## Quota, Limit
 
-## Holizontal Auto Scaler
+### Quota
+プロジェクトに設定する利用可能なリソース使用量のハード制約
+
+### Limit
+Pod/Container に設定する必要なリソース使用量
+
+![QuotaAndLimit](./QuotaLimit.jpg)
+
+
+## Holizontal Pod Auto Scaler
 
 ## アプリケーションのデプロイ
 1. 管理Webにログイン
