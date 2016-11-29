@@ -3,7 +3,7 @@
 ## Agenda
 A. イントロダクション
  1. [重要な用語](introduction/terminology.md)
- 2. [権限管理](introduction/authentication.md)
+ 2. [権限管理](introduction/authorization.md)
 
 B. アプリケーションのデプロイ
  1. [シンプルなアプリケーションのデプロイ](deployInstantApp/DeployInstantApp.md)
