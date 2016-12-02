@@ -3,7 +3,7 @@
 ![projectAuth](./projectAuth.jpg)
 
 ポリシーの設定で、可能な操作を制限可能。
-![multiUser.jpg](./multiUser.jpg)
+![multiuser.jpg](./multiuser.jpg)
 
 ユーザをグループかして、グループに権限を与えることで、開発チーム、運用チームなどの役割分担に合わせて権限を付与することが可能。
 ![projectGroupUser.jpg](./projectGroupUser.jpg)
