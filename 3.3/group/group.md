@@ -30,10 +30,10 @@ oadm policy add-cluster-role-to-group cluster-admin infraAdminGrp
 ## グループの作成
 **グループの作成は管理者用コマンド(oadm)を利用**
 
-1. マスターサーバにsshでログイン  
+0. マスターサーバにsshでログイン  
 各サーバの設定にしたがってください。
 
-2. グループの作成
+0. グループの作成
 ```
 oadm groups new appAdminGrp
 oadm groups add-users appAdminGrp victor
@@ -43,18 +43,22 @@ oadm groups new todoAppGrp alice bob
 ```
 
 ## プロジェクトの作成
-1. クラスタ管理者で管理サーバへログイン
+0. クラスタ管理者で管理サーバへログイン
 ```
 oc login https://<管理サーバのURL> -u zulu
 ```
 
-2. Node.js アプリケーションのプロジェクト作成
+0. Node.js アプリケーションのプロジェクト作成
+```
 oc new-project nodedev
 oc new-project nodeprod
+```
 
-3. Todo アプリケーションのプロジェクト作成
+0. Todo アプリケーションのプロジェクト作成
+```
 oc new-project tododev
 oc new-project todoprod
+```
 
 ## 権限の付与
 0. クラスタ管理者で管理サーバへログイン
