@@ -74,35 +74,35 @@ oc describe policyBindings :default -n nodedev
 0. Todoアプリケーション開発チームに権限の付与  
 tododev プロジェクトの管理権限を付与  
 ```
-oc policy add-role-to-group todoAppGrp admin -n tododev
+oc policy add-role-to-group admin todoAppGrp  -n tododev
 ```
 
 0. Node アプリケーション開発チームに権限の付与  
 nodedev プロジェクトの管理権限を付与
 ```
-oc policy add-role-to-group nodeAppGrp admin -n nodedev
+oc policy add-role-to-group admin nodeAppGrp  -n nodedev
 ```
 
 0. インフラ管理者に権限を付与  
 Todoアプリケーションの開発プロジェクト、本番プロジェクトの管理権限を付与
 ```
-oc policy add-role-to-group infraAdminGrp admin -n tododev
-oc policy add-role-to-group infraAdminGrp admin -n todoprod
+oc policy add-role-to-group admin infraAdminGrp -n tododev
+oc policy add-role-to-group admin infraAdminGrp -n todoprod
 ```
 Nodeアプリケーションの開発プロジェクト、本番プロジェクトの管理権限を付与
 ```
-oc policy add-role-to-group infraAdminGrp admin -n nodedev
-oc policy add-role-to-group infraAdminGrp admin -n nodeprod
+oc policy add-role-to-group admin infraAdminGrp -n nodedev
+oc policy add-role-to-group admin infraAdminGrp -n nodeprod
 ```
 
 0. アプリケーション管理者に権限を付与
 Todoアプリケーションの本番プロジェクトに管理権限を付与
 ```
-oc policy add-role-to-group infraAdminGrp admin -n todoprod
+oc policy add-role-to-group admin infraAdminGrp -n todoprod
 ```
 Nodeアプリケーションの本番プロジェクトに管理権限を付与
 ```
-oc policy add-role-to-group infraAdminGrp admin -n nodeprod
+oc policy add-role-to-group admin infraAdminGrp -n nodeprod
 ```
 
 ## 権限分掌の確認
