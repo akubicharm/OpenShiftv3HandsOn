@@ -95,7 +95,7 @@ OpenShiftでは、コンテナ内のプロセスは一般ユーザ(UID=1001)で�
 認証済み（OpenShiftにログインしている）ユーザ全員に許可する場合
 
 ```
-oadm policy add-scc-to-group anyuid:authenticated
+oadm policy add-scc-to-group anyuid system:authenticated
 ```
 
 特定のプロジェクトに許可する場合
