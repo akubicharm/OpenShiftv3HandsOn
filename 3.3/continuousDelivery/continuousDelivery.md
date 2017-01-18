@@ -70,6 +70,7 @@ hellociのプロジェクトで作成された `helloci/world:prod`のImage Stre
 表示されたポリシー設定コマンドをコピーして、CLI で実行
 ```
 oc policy add-role-to-user system:image-puller system:serviceaccount:hellocd:default -n helloci
+oc policy add-role-to-user view [USERNAME]-n helloci
 ```
 
 7. アプリケーションのデプロイ  
