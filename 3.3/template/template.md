@@ -105,27 +105,27 @@ status: {}
 詳細は、sample-hello-php.yamlを参照
 
 ## テンプレートを使ってアプリケーションをデプロイ
-0. プロジェクトの作成
+1. プロジェクトの作成
 ```
 oc new-project prod
 ```
-0. テンプレートの登録
+2. テンプレートの登録
 ```
 oc create -f sample-hello-php.yaml
 ```
-0. テンプレートを選択
+3. テンプレートを選択
 ![mytemplate](mytemplate.png)
 
 アプリケーションのRoute の設定と、MYSQL のコンテナがデプロイされました。
 まだ、PHPのコンテナはデプロイされていません。
 
 ## tag 付けをしてPHPアプリケーションをデプロイ
-0. 他のプロジェクトのImageの参照権限を付与　　
+1. 他のプロジェクトのImageの参照権限を付与　　
 prodプロジェクトのdefaultサービスアカウントに、phpプロジェクトで作成された、Docker Imageをpullする権限を付与します。
 ```
 oc policy add-role-to-user system:image-puller system:serviceaccount:prod:default -n php
 ```
-0. タグ付け
+2. タグ付け
 ```
 oc tag php/hello:latest prod/hello:prod
 ```
