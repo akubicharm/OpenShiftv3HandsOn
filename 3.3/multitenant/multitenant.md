@@ -1,6 +1,15 @@
 # マルチテナント
 
 Project を跨いだServiceの利用と制限。
+この機能を利用するには、インストール時に OpenShift-SDN の設定でマルチテナントモードを指定してインストールしておく必要があります。
+
+
+/etc/orgin/master/master-config.yaml で networkPluginName を確認してください。
+
+```
+networkConfig:
+  networkPluginName: redhat/openshift-ovs-multitenant
+```
 
 ## ログイン
 1. 監理Webにログイン  
