@@ -16,6 +16,9 @@ k8s Pod
 pod群のIPアドレスを保持し、podへのアクセスポイントとなるKubernetesのオブジェクト
 k8s Service
 
+## Endpoint
+Serviceのバックエンドにある Pod または、外部のサーバの接続先
+
 ## Replication Controller (rc)
 podの数を管理して制御するKubernetesのオブジェクト
 k8s Replication Controller
@@ -32,3 +35,8 @@ k8s Replication Controller
 
 ## Route
 ルーター設定を行うOpenShiftのオブジェクト。OpenShiftのHAProxyルーターコンポーネントの設定情報を保持する。Routeを作成すると、OpenShift外部からサービスへURLアクセス可能になる。oc exposeコマンドで作成できる。
+
+
+## Label
+Pod, Service, Route など、OpenShift で利用するオブジェクトに付与することができる識別肢。
+複数のラベルを設定することができる。
