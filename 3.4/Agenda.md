@@ -8,8 +8,8 @@ A. イントロダクション
 B. アプリケーションのデプロイ
  1. [シンプルなアプリケーションのデプロイ](deployInstantApp/DeployInstantApp.md)
  2. [複雑なアプリケーションのデプロイ](deployComplexApp/DeployComplexApp.md)
- 3. [Docker Imageを使ったデプロイ](deployDockerImage/DeployDockerImage.md)
- 4. [WARファイルを使ったデプロイ](deployWarfile/deployWarfile.md)
+ 3. [Docker Image を使ったアプリケーションのデプロイ](deployDockerImage/DeployDockerImage.md)
+ 4. [WAR ファイルを使ったアプリケーションのデプロイ](deployWarfile/deployWarfile.md)
  5. [永続化ストレージの設定](persistentVolume/persistentVolume.md)
 
 C. 継続的インテグレーション/継続的デリバリー
