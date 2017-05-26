@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: egress-1
+spec:
+  ports:
+  - name: db
+    port: 3306
+  loadBalancerIP: 172.46.0.1
+  type: LoadBalancer
+  selector:
+    name: my-db-selector
