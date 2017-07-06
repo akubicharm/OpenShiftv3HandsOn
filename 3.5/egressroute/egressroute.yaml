@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: egress-1
+  labels:
+    name: egress-1
+  annotations:
+    pod.network.openshift.io/assign-macvlan: "true"
+spec:
+  containers:
+  - name: egress-router
+    image: 172.30.164.241:5000/egress/openshift-playground
+    securityContext:
+      privileged: true
+    env:
+    - name: EGRESS_SOURCE 
+      value: 192.168.0.99
+    - name: EGRESS_GATEWAY 
+      value: 192.168.0.2
+    - name: EGRESS_DESTINATION 
+      value: 104.199.239.163
+  nodeSelector:
+    site: springfield-1
