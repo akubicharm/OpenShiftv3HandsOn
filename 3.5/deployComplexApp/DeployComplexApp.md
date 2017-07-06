@@ -6,10 +6,10 @@
 * Pod 間の通信に用いる [Service] の用途を理解する
 
 ## 利用するテンプレート
-* PHP (5.x Latest)
+* PHP (7.x Latest)
 サンプル用のアプリケーションに `https://github.com/akubicharm/hello-php` を利用します。
 
-* MariaDB (Ephemeral)
+* MySQLDB (Ephemeral)
 DB のデータ領域に揮発性ストレージを利用します。
 Pod が再起動するとデータは削除されます。
 
@@ -34,7 +34,7 @@ Pod が再起動するとデータは削除されます。
 |Name|hello|
 
 1. カタログの選択
-一覧から「PHP (Verion 5.x - Latest)」を選択し、 `Select` をクリックする。
+一覧から「PHP (Verion 7.x - Latest)」を選択し、 `Select` をクリックする。
 次の値を入力し、 `Create` ボタンをクリックする。
 
 |フィールド|値|

@@ -28,12 +28,12 @@ oc new-project wardeploy
 mkdir -p wardeploy/deployments
 cd wardeploy/
 curl -o deployments/ROOT.war
--O https://github.com/akubicharm/OpenShiftv3HandsOn/blob/master/3.4/deployWarfile/ROOT.war
+-O https://github.com/akubicharm/OpenShiftv3HandsOn/blob/master/3.5/deployWarfile/ROOT.war
 ```
 
 1. BuildConfig の作成
 ```
-oc new-build jboss-eap64-openshift --name=helloworld --binary=true
+oc new-build jboss-eap70-openshift --name=helloworld --binary=true
 ```
 
 `oc new-build` のオプションに **--binary=true** を指定すると、 ビルドする際の Source Type をバイナリファイルにするよう強制します。
@@ -74,6 +74,8 @@ Pushed 0/7 layers, 7% complete
 Pushed 1/7 layers, 14% complete
 Push successful
 ```
+
+ここまでだと、　Image Stream が出来上がっただけなので、Image Appデプロイと同じ方法でアプリケーションをデプロイします。
 
 1. Service の確認
 ```

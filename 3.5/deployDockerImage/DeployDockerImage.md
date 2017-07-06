@@ -32,6 +32,8 @@ oc login -u system:admin
 oc adm policy add-scc-to-group anyuid system:serviceaccounts:imageapp
 ```
 
+※Wildflyのコンテナイメージは anyuid の SCC 設定は不要になった
+
 1. デプロイ方式の選択
 `Add to Project` 画面上部のタブで `Deploy Image` を選択する。
 ![./deployImageTab.png](./deployImageTab.png)
@@ -61,7 +63,7 @@ oc adm policy add-scc-to-group anyuid system:serviceaccounts:imageapp
 |Service|wildfly（デフォルトのまま）|
 |Target Port|8080->8080(TCP)（デフォルトのまま）|
 
-**デプロイ方式の選択に Docker Image を指定する場合、クイックスタート用テンプレートとは異なり、アプリケーションにアクセスするための公開 URL (Route) は自動で作成されません。そのため、 Route を手動で作成します。**
+** デプロイ方式の選択に Docker Image を指定する場合、クイックスタート用テンプレートとは異なり、アプリケーションにアクセスするための公開 URL (Route) は自動で作成されません。そのため、 Route を手動で作成します。**
 
 ** Hostname を指定しない場合、_<アプリケーション名>-<プロジェクト名>.<デフォルトのサブドメイン名>_  でURLが生成されます。**
 
@@ -70,3 +72,8 @@ oc adm policy add-scc-to-group anyuid system:serviceaccounts:imageapp
 
 Route が正常に作成されている場合、次のように表示されます。
 ![wildfly page](./wildflypage.png)
+
+### SCC 設定が必要なアプリケーションのデプロイ
+1. DeployImageを洗濯
+2. docker.io/gitlab/gitlab-ce を指定
+3. Routeの作成（80番ポートをマッピング）
