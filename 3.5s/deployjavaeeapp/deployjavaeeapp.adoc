@@ -1,0 +1,79 @@
+# JavaEEアプリケーションのデプロイ
+
+JBoss Quick Start で提供されている ToDo アプリケーションをデプロイします。
+
+## 目的
+* テンプレートを利用したアプリケーションのデプロイ方法を理解する
+* アプリケーションサーバとデータベースサーバの連携の仕組みを理解する
+
+
+## 利用するテンプレート
+*
+
+
+## Hands-On
+### アプリケーションのデプロイ
+
+. Web Consoleへログイン
++
+`https://<利用環境のURL>:8443/console` にアクセスする
+
+. プロジェクトの作成
++
+`New Project` ボタンをクリックし、プロジェクト作成ウィザードを開始する。ウィザードで次の値を入力し`Create`ボタンをクリックする。
++
+[options="header"]
+|===
+|フィールド名|値|備考
+|Name|firstappXXX|OpenShiftのクラスタ内でプロジェクト名は一意である必要があるため、XXXは各自のIDに読み替えてください。 IDが10の場合は firstapp10 とする。
+|===
+
+. Secretの登録
++
+* "Add to Project"画面で、"Import YAML/JSON"タブを選択
+* "Browse"ボタンをクリックして、ダイアログで'eap7-app-secret.json'を選択
+* "Create"ボタンをクリックしてSecretを作成
+
+. テンプレートの選択
++
+* "Add to Project"画面で、"Browse Catalog"タブを選択
+* テキストフィールドに`eap mysql` と入力し、テンプレートを検索
+* "eap70-mysql-s2i"の"Select"ボタンをクリック
+
+. アプリケーションの作成
++
+"eap70-mysql-s2i"の設定ウィザードでパラメータを確認する。ここではDB_USERNAME, DB_PASSWORD以外は変更しない。
+以下のパラメータを入力後、画面を下までスクロールし"Create"ボタンをクリックする。
++
+[options="header"]
+|===
+|パラメータ名|値
+|DB_USERNAME|dbuser
+|DB_PASSWORD|dbpassword
+|===
++
+アプリケーションの作成が始まったら、"Continue to overview"のリンクをクリックする。
+
+. ビルドの確認
++
+"EAP 70 MYSQL S2I"の"View log"リンクをクリックしビルドログを表示する。ビルドの最後に、OpenShiftのDocker RegistryにDocker Imageのpushが成功したログが出ていればビルドは正常終了している。
++
+```
+Pushing image 172.30.52.98:5000/hoge/eap-app:latest ...
+Pushed 0/7 layers, 2% complete
+Pushed 1/7 layers, 15% complete
+Pushed 2/7 layers, 31% complete
+Pushed 3/7 layers, 46% complete
+Pushed 3/7 layers, 58% complete
+Pushed 3/7 layers, 73% complete
+Pushed 4/7 layers, 76% complete
+Pushed 5/7 layers, 84% complete
+Pushed 5/7 layers, 97% complete
+Pushed 6/7 layers, 99% complete
+Pushed 7/7 layers, 100% complete
+Push successful
+```
+
+. デプロイの確認
++
+Docker Imageの作成が成功しても、デプロイは完了していない。"Overview"画面に戻り、デプロイを確認する。

@@ -1,0 +1,183 @@
+# Git リポジトリのデプロイ
+
+ソースコードの更新を体験するため、Gitサービスをデプロイします。
+ここでは Gogs[https://gogs.io/]を利用します。
+
+## 目的
+
+既存のDockerImageを使ったアプリケーションのデプロイの演習として、GitサービスであるGogsをデプロイします。
+
+### GOGSリポジトリのデプロイ
+`https://github.com/OpenShiftDemos/gogs-openshift-docker` に登録されている、Postgresql(Ephemeral)を利用するテンプレートを使ってgogsをデプロイする。
+
+#### テンプレートファイルのダウンロード
+事前にテンプレートファイルをダウンロードして、作業用ディレクトリに`openshift-gogs-template.yaml`というファイル名で保存します。
+```
+wget http://bit.ly/openshift-gogs-template -O openshift-gogs-template.yaml
+```
+### テンプレートを使ってデプロイ
+
+1. OpenShiftのWebコンソールへログイン
+
+2. プロジェクトの作成
++
+Welcome to OpenShift画面の中央の「New Project」ボタンをクリックする。
+
+3. プロジェクト名の入力
++
+|===
+|フィールド|値|説明
+|Name(必須)|scmXXX|プロジェクト名
+|Display Name|(空白)|指定した場合は、プロジェクト一覧に表示される
+|Description|(空白)|プロジェクトの説明
+|===
+
+4. デプロイ方法の選択
++
+画面上部のタブで「Import YAML/JSON」を選択
+
+5. YAML ファイルの指定
++
+「Browse」ボタンをクリックしてファイル選択ダイアログを表示。ダウンロードしておいたopenshift-gogs-template.yaml を選択。
+
+6. テンプレートを処理
++
+画面下部の「Create」ボタンをクリック。
+Add Template ダイアログで、「Process the Template」のチェックボックスにチェック。
+
+7. GOGSのデプロイ
++
++
+|===
+|フィールド|値
+|HOSTNAME|gogs-<プロジェクト名>.<app prefix>
+|Skip TLS Verification|true
+|===
++
+その他のパラメータは変更せず、画面下部の「Create」ボタンをクリック。
+
+
+[NOTE]
+====
+Gogsのデプロイに時間がかかるため、何度かヘルスチェックに失敗することがありますが、そのまま待っていてください。
+====
+
+
+### Ggosのユーザー登録
+ラボで利用するためのユーザを追加します。
+
+1. workshop-infra プロジェクトを選択
+
+2. gogsのURLをクリック
++
+http://gogs-scmXXX.<APPLICATION_SUBDOMAIN>/
+
+3. Gogs のダッシュボードで「Register」をクリック
+
+4. Sign Up情報を登録
++
+フィールドに値を入力し「Create New Account」ボタンをクリック
++
+|===
+|Username|dev
+|Email|dev@example.com
+|Password|dev
+|Re-Type|dev
+|===
+
+5. Sign In
++
+先ほど作成したユーザでログイン
++
+|===
+|Username or email|dev
+|Password|dev
+|===
+
+
+### リポジトリ作成
+
+1. リポジトリの作成
++
+GogsのDashboard画面の「My Repositories」横にある「+」をクリック
++
+New Repository画面でフィールドに値を入力し、「Create Repository」ボタンをクリック
++
+|===
+|Owner|dev
+|Repository Name|mytodo
+|===
+
+### ToDoアプリケーションのソースコードの登録
+. 作成したリポジトリを clone
+```
+git clone <リポジトリURL
+```
+
+. アーカイブの展開
+`git clone`で作成したディレクトリに移動し、todo.tar を展開してコミット
+```
+cd mytoddo
+tar xvf ../todo.tar
+git add
+git commit -m"create"
+git push
+$ git push
+Username for 'http://gogs-scm.40.74.119.81.xip.io': dev
+Password for 'http://dev@gogs-scm.40.74.119.81.xip.io': dev <--- 表示されないけど入力
+Counting objects: 56, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (36/36), done.
+Writing objects: 100% (56/56), 68.58 KiB | 0 bytes/s, done.
+Total 56 (delta 4), reused 0 (delta 0)
+To http://gogs-scm.40.74.119.81.xip.io/dev/mytodo
+ * [new branch]      master -> master
+```
+
+## Todo Appのソースコード更新
+. プロジェクトの選択
++
+プロジジェクト一覧からToDoアプリケーションをデプロイしたプロジェクトを選択
+
+. BuildConfigの選択
++
+画面左のメニューから"Builds->Builds"を選択し、一覧から "eap-app"を選択。
+
+. BuildConfigの編集
++
+画面右上の"Actions"メニューから"Edit"を選択し、編集画面を表示。
++
+BuilConfigの編集画面でGit Repository URLを、先ほどデプロイしたGOGSのディレクトリに変更。さらに、Advancec Options で "Git Reference", "Context Dir" を空白にする。
+
+. BuildConfigの保存
++
+画面を下までスクロールし"Create"ボタンをクリック
+
+## アプリケーション更新の自動化
+. Webhook URL の確認
++
+プロジェクト一覧からToDoアプリケーションをデプロイしたプロジェクトを選択し、左側のメニューから"Builds->Builds"を選択。
++
+BuildConfig一覧から"eap-app"を選択（リンクをクリック）し、タブメニューから"Configuration"を選択。
++
+Triggers エリアに表示されている"GitHub Webhook URL"をコピーしておく。
+
+
+. Webhookの設定
++
+Gogsの画面上部のタブから"Settings"を選択し、画面左部に表示されたメニュー一覧から"Webhooks"を選択。
++
+"Add Webhook"ボタンをクリックし、Webhook の設定画面を表示。
+
+. WebHook の情報の入力
++
+Add Webhookの設定画面で以下のパラメータを入力
++
+[option="headers"]
+|===
+|パラメータ名|値
+|Payload URL|（先ほどコピーしたwebhook URL をペースト)
+|Content Type|application/json
+|===
++
+最後に、"Add Webhook"ボタンをクリック。
